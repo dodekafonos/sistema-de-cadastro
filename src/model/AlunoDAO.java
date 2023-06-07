@@ -31,11 +31,11 @@ public class AlunoDAO {
     }
 
     public ArrayList<String> buscarAluno(String nome) {
-        ArrayList<String> nomes = new ArrayList();
-        String sql = "SELECT * FROM aluno WHERE nome LIKE (?)";
+        ArrayList<String> nomes = new ArrayList<>();
+        String sql = "SELECT * FROM aluno WHERE nome LIKE ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, "%" + nome + "%");
-            try (ResultSet resultSet = statement.executeQuery(sql)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     String registro = resultSet.getString("nome");
                     nomes.add(registro);
@@ -45,9 +45,6 @@ public class AlunoDAO {
             throw new RuntimeException(e);
         }
 
-        for (String n : nomes) {
-            System.out.println(n);
-        }
         return nomes;
     }
     public void atualizarNome(String cpf, String nome) {
