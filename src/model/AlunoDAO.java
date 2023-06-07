@@ -1,10 +1,9 @@
 package model;
 
 import database.DatabaseConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
+import java.util.ArrayList;
 
 public class AlunoDAO {
 
@@ -31,16 +30,25 @@ public class AlunoDAO {
         }
     }
 
-    public String buscarAluno(String nome) {
-        String sql = "SELECT * FROM aluno WHERE nome = ?";
+    public ArrayList<String> buscarAluno(String nome) {
+        ArrayList<String> nomes = new ArrayList();
+        String sql = "SELECT * FROM aluno WHERE nome LIKE (?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, nome);
-            int rowsAffected = statement.executeUpdate();
-            System.out.println(rowsAffected + " row(s) inserted.");
+            statement.setString(1, "%" + nome + "%");
+            try (ResultSet resultSet = statement.executeQuery(sql)) {
+                while (resultSet.next()) {
+                    String registro = resultSet.getString("nome");
+                    nomes.add(registro);
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return nome;
+
+        for (String n : nomes) {
+            System.out.println(n);
+        }
+        return nomes;
     }
     public void atualizarNome(String cpf, String nome) {
         String sql = "UPDATE aluno SET nome = (?) WHERE cpf = (?)";

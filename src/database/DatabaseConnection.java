@@ -20,9 +20,8 @@ public class DatabaseConnection {
 
                 // Configuring DB connection
                 String serverName = "localhost:3306";
-                String database = "avaliacao_02";
+                String database = "cadastro";
                 String url = "jdbc:mysql://" + serverName + "/" + database;
-//                jdbc:mysql://localhost:3306/avaliacao_02
                 String username = "root";
                 String password = "mulinhas";
                 connection = DriverManager.getConnection(url, username, password);
