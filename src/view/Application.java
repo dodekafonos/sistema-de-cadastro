@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.tools.javac.Main;
 import database.DatabaseConnection;
 import model.Aluno;
 import model.AlunoDAO;
@@ -23,6 +24,9 @@ public class Application {
         for (String n : aluno) {
             System.out.println(n);
         }
+
+        MainPage pag = new MainPage();
+
     }
 
 }
