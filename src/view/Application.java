@@ -1,8 +1,5 @@
 package view;
 
-import com.sun.tools.javac.Main;
-import database.DatabaseConnection;
-import model.Aluno;
 import model.AlunoDAO;
 
 import java.sql.SQLException;
@@ -25,7 +22,7 @@ public class Application {
             System.out.println(n);
         }
 
-        MainPage pag = new MainPage();
+        TelaCadastro pag = new TelaCadastro();
 
     }
 
