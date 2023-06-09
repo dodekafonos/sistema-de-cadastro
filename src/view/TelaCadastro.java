@@ -1,11 +1,14 @@
 package view;
 
+import model.AlunoDAO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.SQLException;
 
 
 public class TelaCadastro extends JFrame {
@@ -21,6 +24,8 @@ public class TelaCadastro extends JFrame {
         setLocationRelativeTo(null);
 
         setVisible(true);
+
+        AlunoDAO alunoController = new AlunoDAO();
 
         atualizarButton.addActionListener(new ActionListener() {
             @Override
@@ -90,6 +95,42 @@ public class TelaCadastro extends JFrame {
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
                 alturaTxt.setText("");
+            }
+        });
+        cadastrarButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (nomeTxt.getText().equals("Ruy Mauro Marini") ||
+                    nomeTxt.getText().equals("") ||
+                    cpfTxt.getText().equals("123.456.789-01") ||
+                    cpfTxt.getText().equals("") ||
+                    diaTxt.getText().equals("Dia") ||
+                    diaTxt.getText().equals("") ||
+                    mesTxt.getText().equals("Mês") ||
+                    mesTxt.getText().equals("") ||
+                    anoTxt.getText().equals("Ano") ||
+                    anoTxt.getText().equals("") ||
+                    pesoTxt.getText().equals("82.5") ||
+                    alturaTxt.getText().equals("182") ||
+                    alturaTxt.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Favor preencher todos os campos.");
+                } else {
+                    String nome = nomeTxt.getText();
+                    String cpf = cpfTxt.getText();
+                    String dn = anoTxt.getText() + "-" + mesTxt.getText() + "-" + diaTxt.getText();
+                    double peso = Double.parseDouble(pesoTxt.getText());
+                    int altura = Integer.parseInt(alturaTxt.getText());
+                    alunoController.inserirAluno(cpf, nome, dn, peso, altura);
+                    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+                    nomeTxt.setText("");
+                    cpfTxt.setText("");
+                    diaTxt.setText("");
+                    mesTxt.setText("");
+                    anoTxt.setText("");
+                    pesoTxt.setText("");
+                    alturaTxt.setText("");
+                }
             }
         });
     }
