@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 public class TelaCadastro extends JFrame {
 
     public TelaCadastro() {
+
         setContentPane(MainPane);
         setTitle("Sistema de Cadastro");
         setSize(600, 400);
@@ -16,6 +17,7 @@ public class TelaCadastro extends JFrame {
         setFont(Font.getFont("JetBrains Mono"));
 //        getContentPane().setBackground(Color.decode("#658EA9"));
         setLocationRelativeTo(null);
+
         setVisible(true);
 
         atualizarButton.addActionListener(new ActionListener() {
@@ -27,6 +29,13 @@ public class TelaCadastro extends JFrame {
     }
 
     public static void main(String[] args) {
+        // Set the Look and Feel
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException |
+                 InstantiationException e) {
+            throw new RuntimeException(e);
+        }
         new TelaCadastro();
     }
     private JButton cadastrarButton;
