@@ -30,22 +30,27 @@ public class AlunoDAO {
         }
     }
 
-    public ArrayList<String> buscarAluno(String nome) {
-        ArrayList<String> nomes = new ArrayList<>();
+    public ArrayList<Aluno> buscarAluno(String nome) {
+        ArrayList<Aluno> alunos = new ArrayList<>();
         String sql = "SELECT * FROM aluno WHERE nome LIKE ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, "%" + nome + "%");
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    String registro = resultSet.getString("nome");
-                    nomes.add(registro);
+                    String cpf = resultSet.getString("cpf");
+                    String nome2 = resultSet.getString("nome");
+                    String dn = resultSet.getString("dataNascimento");
+                    double peso = resultSet.getDouble("peso");
+                    int altura = resultSet.getInt("altura");
+                    Aluno novo = new Aluno(cpf, nome2, dn, peso, altura);
+                    alunos.add(novo);
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return nomes;
+        return alunos;
     }
     public void atualizarNome(String cpf, String nome) {
         String sql = "UPDATE aluno SET nome = (?) WHERE cpf = (?)";

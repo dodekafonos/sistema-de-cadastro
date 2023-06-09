@@ -1,9 +1,14 @@
 package view;
 
+import model.Aluno;
+import model.AlunoDAO;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class TelaBusca extends JFrame{
 
@@ -38,6 +43,32 @@ public class TelaBusca extends JFrame{
                 new TelaExcluir().setVisible(true);
             }
         });
+
+        buscarButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createTable();
+            }
+        });
+    }
+
+    public void createTable() {
+        String res = nomeTxt.getText();
+        ArrayList<Aluno> alunos = new AlunoDAO().buscarAluno(res);
+
+        DefaultTableModel tableModel = new DefaultTableModel(
+                new Object[0][],
+                new String[]{"CPF", "Nome", "Data de Nascimento", "Peso", "Altura"}
+        );
+
+        String[] header = {"CPF", "Nome", "Data Nasc.", "Peso", "Altura"};
+        tableModel.addRow(header);
+        for (Aluno aluno : alunos) {
+            Object[] rowData = {aluno.getCpf(), aluno.getNome(), aluno.getDataNascimento(), aluno.getPeso(), aluno.getAltura()};
+            tableModel.addRow(rowData);
+        }
+
+        table1.setModel(tableModel);
     }
     private JPanel MainPane;
     private JButton cadastrarButton;
@@ -46,4 +77,6 @@ public class TelaBusca extends JFrame{
     private JButton excluirButton;
     private JButton buscarButton1;
     private JTable table1;
+    private JTextField nomeTxt;
+    private JButton atualizarDadosButton;
 }
