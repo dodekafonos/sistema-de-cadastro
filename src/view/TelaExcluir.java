@@ -1,5 +1,7 @@
 package view;
 
+import model.AlunoDAO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -38,6 +40,14 @@ public class TelaExcluir extends JFrame {
                 new TelaBusca().setVisible(true);
             }
         });
+        buscaExcluirBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String busca = nomeOuCpfExcluirTxt.getText();
+                String res = String.valueOf(new AlunoDAO().buscarAluno(busca));
+                textPane1.setText(res);
+            }
+        });
     }
     private JPanel MainPane;
     private JButton cadastrarButton;
@@ -45,4 +55,7 @@ public class TelaExcluir extends JFrame {
     private JButton atualizarButton;
     private JButton excluirButton;
     private JButton excluirButton1;
+    private JTextPane textPane1;
+    private JButton buscaExcluirBtn;
+    private JTextField nomeOuCpfExcluirTxt;
 }

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 
 public class TelaCadastro extends JFrame {
@@ -41,6 +43,55 @@ public class TelaCadastro extends JFrame {
                 new TelaBusca().setVisible(true);
             }
         });
+        diaTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                diaTxt.setText("");
+            }
+        });
+        mesTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                mesTxt.setText("");
+            }
+        });
+        anoTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                anoTxt.setText("");
+            }
+        });
+        nomeTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                nomeTxt.setText("");
+            }
+        });
+        cpfTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                cpfTxt.setText("");
+            }
+        });
+        pesoTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                pesoTxt.setText("");
+            }
+        });
+        alturaTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                alturaTxt.setText("");
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -59,4 +110,11 @@ public class TelaCadastro extends JFrame {
     private JButton excluirButton;
     private JPanel MainPane;
     private JButton cadastrarButton1;
+    private JTextField diaTxt;
+    private JTextField mesTxt;
+    private JTextField anoTxt;
+    private JTextField nomeTxt;
+    private JTextField cpfTxt;
+    private JTextField pesoTxt;
+    private JTextField alturaTxt;
 }
