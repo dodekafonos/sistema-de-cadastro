@@ -2,28 +2,26 @@ package view;
 
 import model.AlunoDAO;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Application {
-
-    public static void main(String[] args) throws SQLException {
-//
-//        Aluno aluno_01 = new Aluno("131.013.936-98", "Jonas Alves Bueno", "1996-06-07", 58, 169);
-//
-        AlunoDAO alunoController = new AlunoDAO();
-//
-//        alunoController.inserirAluno(aluno_01.getCpf(), aluno_01.getNome(), aluno_01.getDataNascimento(), aluno_01.getPeso(), aluno_01.getAltura());
-
-//        alunoController.deletarAluno("123.123.123-12");
-        ArrayList<String> aluno = alunoController.buscarAluno("Jonas");
-
-        for (String n : aluno) {
-            System.out.println(n);
-        }
-
-        TelaCadastro pag = new TelaCadastro();
-
+    public static void main(String[] args) {
+        new Application().run();
     }
 
+    public void run() {
+        // Set the Look and Feel
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException |
+                 InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+
+        new TelaCadastro();
+    }
 }
+
+
