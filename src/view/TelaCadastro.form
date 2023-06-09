@@ -99,7 +99,7 @@
         <properties>
           <font name="JetBrains Mono" size="14"/>
           <text value=""/>
-          <toolTipText value="Insira o nome do(a) aluno(a)..."/>
+          <toolTipText value="Insira o CPF do(a) aluno(a)..."/>
         </properties>
       </component>
       <component id="48af1" class="javax.swing.JLabel">
@@ -124,7 +124,7 @@
         <properties>
           <font name="JetBrains Mono" size="14"/>
           <text value=""/>
-          <toolTipText value="Insira o nome do(a) aluno(a)..."/>
+          <toolTipText value="Insira a Data de Nascimento do(a) aluno(a)..."/>
         </properties>
       </component>
       <component id="3faa3" class="javax.swing.JLabel">
@@ -149,7 +149,7 @@
         <properties>
           <font name="JetBrains Mono" size="14"/>
           <text value=""/>
-          <toolTipText value="Insira o nome do(a) aluno(a)..."/>
+          <toolTipText value="Insira o peso do(a) aluno(a) em quilos."/>
         </properties>
       </component>
       <component id="42013" class="javax.swing.JLabel">
@@ -174,7 +174,7 @@
         <properties>
           <font name="JetBrains Mono" size="14"/>
           <text value=""/>
-          <toolTipText value="Insira o nome do(a) aluno(a)..."/>
+          <toolTipText value="Insira a altura do(a) aluno(a) em cm's"/>
         </properties>
       </component>
       <component id="92652" class="javax.swing.JLabel">

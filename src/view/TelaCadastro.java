@@ -12,7 +12,7 @@ public class TelaCadastro extends JFrame {
 
         setContentPane(MainPane);
         setTitle("Sistema de Cadastro");
-        setSize(600, 400);
+        setSize(720, 480);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFont(Font.getFont("JetBrains Mono"));
 //        getContentPane().setBackground(Color.decode("#658EA9"));
@@ -23,7 +23,22 @@ public class TelaCadastro extends JFrame {
         atualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new TelaAtualizacao().setVisible(true);
+                setVisible(false);
+                new TelaAtualizar().setVisible(true);
+            }
+        });
+        excluirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new TelaExcluir().setVisible(true);
+            }
+        });
+        buscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new TelaBusca().setVisible(true);
             }
         });
     }
