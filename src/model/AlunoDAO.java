@@ -135,7 +135,7 @@ public class AlunoDAO {
         }
     }
 
-    public double calculaIMC(String cpf) {
+    public String calculaIMC(String cpf) {
         String sql = "SELECT peso, altura FROM aluno WHERE cpf = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, cpf);
@@ -146,14 +146,13 @@ public class AlunoDAO {
                     double imc = peso / ((altura / 100) * (altura / 100));
 
                     DecimalFormat decimalFormat = new DecimalFormat("#.##");
-                    String imcFormatado = decimalFormat.format(imc);
-                    return Double.parseDouble(imcFormatado);
+                    return decimalFormat.format(imc);
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return 0;
+        return "Não foi possível calcular o IMC.";
     }
 
     // Converter data yyyy-mm-dd para dd/mm/yyyy:

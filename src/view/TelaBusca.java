@@ -90,7 +90,10 @@ public class TelaBusca extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String cpf = table1.getValueAt(table1.getSelectedRow(), 0).toString();
-                JOptionPane.showMessageDialog(null, new AlunoDAO().calculaIMC(cpf));
+                String nome = table1.getValueAt(table1.getSelectedRow(), 1).toString();
+                String imc = new AlunoDAO().calculaIMC(cpf);
+                String msg = "O IMC de " + nome + " é de " + imc + ".";
+                JOptionPane.showMessageDialog(null, msg);
             }
         });
     }
