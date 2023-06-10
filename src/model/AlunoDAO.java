@@ -3,6 +3,7 @@ package model;
 import database.DatabaseConnection;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -132,6 +133,27 @@ public class AlunoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public double calculaIMC(String cpf) {
+        String sql = "SELECT peso, altura FROM aluno WHERE cpf = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, cpf);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    double peso = resultSet.getDouble("peso");
+                    double altura = resultSet.getInt("altura");
+                    double imc = peso / ((altura / 100) * (altura / 100));
+
+                    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                    String imcFormatado = decimalFormat.format(imc);
+                    return Double.parseDouble(imcFormatado);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 
     // Converter data yyyy-mm-dd para dd/mm/yyyy:

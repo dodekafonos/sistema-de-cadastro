@@ -24,6 +24,7 @@ public class TelaBusca extends JFrame{
         setFont(Font.getFont("JetBrains Mono"));
 //        getContentPane().setBackground(Color.decode("#658EA9"));
         setLocationRelativeTo(null);
+        createTable();
 
         setVisible(true);
         cadastrarButton.addActionListener(new ActionListener() {
@@ -33,21 +34,6 @@ public class TelaBusca extends JFrame{
                 new TelaCadastro().setVisible(true);
             }
         });
-        // Botões antigos:
-//        atualizarButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                setVisible(false);
-//                new TelaAtualizar().setVisible(true);
-//            }
-//        });
-//        excluirButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                setVisible(false);
-//                new TelaExcluir().setVisible(true);
-//            }
-//        });
 
         buscarButton2.addActionListener(new ActionListener() {
             @Override
@@ -82,10 +68,29 @@ public class TelaBusca extends JFrame{
                     String dn = table1.getValueAt(selectedRow, 2).toString();
                     double peso = Double.parseDouble(table1.getValueAt(selectedRow, 3).toString());
                     int altura = Integer.parseInt(table1.getValueAt(selectedRow, 4).toString());
-                    System.out.println("Selected CPF: " + cpf);
+                    System.out.println("CPF: selecionado" + cpf);
                     new AlunoDAO().atualizarDados(cpf, nome, dn, peso, altura);
                     JOptionPane.showMessageDialog(null, "Dados do aluno de CPF "+cpf+" atualizados com sucesso.");
                 }
+            }
+        });
+        excluirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table1.getSelectedRow();
+                if (selectedRow != -1) {
+                    String cpf = table1.getValueAt(selectedRow, 0).toString();
+                    System.out.println("CPF selecionado: " + cpf);
+                    new AlunoDAO().deletarAluno(cpf);
+                    JOptionPane.showMessageDialog(null, "Aluno de CPF "+cpf+" excluído com sucesso.");
+                }
+            }
+        });
+        calcularIMCBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cpf = table1.getValueAt(table1.getSelectedRow(), 0).toString();
+                JOptionPane.showMessageDialog(null, new AlunoDAO().calculaIMC(cpf));
             }
         });
     }
@@ -112,11 +117,11 @@ public class TelaBusca extends JFrame{
 
     private JPanel MainPane;
     private JButton cadastrarButton;
-    private JButton buscarButton;
     private JButton atualizarButton;
     private JButton excluirButton;
     private JButton buscarButton2;
     private JTable table1;
     private JTextField nomeTxt;
     private JButton atualizarDadosButton;
+    private JButton calcularIMCBtn;
 }

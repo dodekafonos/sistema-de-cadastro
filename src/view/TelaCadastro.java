@@ -30,14 +30,14 @@ public class TelaCadastro extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new TelaAtualizar().setVisible(true);
+                new TelaBusca().setVisible(true);
             }
         });
         excluirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new TelaExcluir().setVisible(true);
+                new TelaBusca().setVisible(true);
             }
         });
         buscarButton.addActionListener(new ActionListener() {
