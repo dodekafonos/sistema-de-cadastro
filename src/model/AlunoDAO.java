@@ -3,6 +3,8 @@ package model;
 import database.DatabaseConnection;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AlunoDAO {
@@ -116,4 +118,33 @@ public class AlunoDAO {
         return null;
     }
 
+    public void atualizarDados(String cpf, String nome, String dn, double peso, int altura) {
+        String sql = "UPDATE aluno SET nome = ?, dataNascimento = ?, peso = ?, altura = ? WHERE cpf = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, nome);
+            statement.setString(2, dn);
+            statement.setDouble(3, peso);
+            statement.setInt(4, altura);
+            statement.setString(5, cpf);
+            int rowsAffected = statement.executeUpdate();
+            System.out.println(rowsAffected + " colunas afetadas.");
+            System.out.println("Dados do aluno de cpf " + cpf + " alterados com sucesso.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Converter data yyyy-mm-dd para dd/mm/yyyy:
+    public static String formataData(String inputDate) {
+        LocalDate date = LocalDate.parse(inputDate);
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.format(outputFormatter);
+    }
+    // Converter data dd/mm/yyyy para yyyy-mm-dd:
+    public static String desformataData(String inputDate) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(inputDate, inputFormatter);
+        return date.format(outputFormatter);
+    }
 }
