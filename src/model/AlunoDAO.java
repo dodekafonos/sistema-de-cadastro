@@ -2,9 +2,14 @@ package model;
 
 import database.DatabaseConnection;
 
+import javax.swing.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -55,40 +60,7 @@ public class AlunoDAO {
 
         return alunos;
     }
-    public void atualizarNome(String cpf, String nome) {
-        String sql = "UPDATE aluno SET nome = (?) WHERE cpf = (?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, cpf);
-            int rowsAffected = statement.executeUpdate();
-            System.out.println(rowsAffected + " colunas afetadas.");
-            System.out.println("Peso do aluno de cpf " + cpf + " alterada com sucesso.");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    public void atualizarPeso(String cpf, double peso) {
-        String sql = "UPDATE aluno SET peso = (?) WHERE cpf = (?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, cpf);
-            int rowsAffected = statement.executeUpdate();
-            System.out.println(rowsAffected + " colunas afetadas.");
-            System.out.println("Peso do aluno de cpf " + cpf + " alterada com sucesso.");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public void atualizarAltura(String cpf, int altura) {
-        String sql = "UPDATE aluno SET altura = (?) WHERE cpf = (?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, cpf);
-            int rowsAffected = statement.executeUpdate();
-            System.out.println(rowsAffected + " colunas afetadas.");
-            System.out.println("Altura do aluno de cpf " + cpf + " alterada com sucesso.");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
     public void deletarAluno(String cpf) {
         String sql = "DELETE FROM aluno WHERE cpf = (?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -105,8 +77,6 @@ public class AlunoDAO {
         String sql = "Select cpf FROM aluno WHERE nome = (?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, nome);
-            int rowsAffected = statement.executeUpdate();
-            System.out.println(rowsAffected + " colunas afetadas.");
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     String cpf = resultSet.getString("cpf");
@@ -117,6 +87,69 @@ public class AlunoDAO {
             throw new RuntimeException(e);
         }
         return null;
+    }
+    public String getNomePeloCpf(String cpf) {
+        String sql = "Select nome FROM aluno WHERE cpf = (?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, cpf);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String nome = resultSet.getString("nome");
+                    return nome;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+    public String getAlturaPeloCpf(String cpf) {
+        String sql = "Select altura FROM aluno WHERE cpf = (?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, cpf);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String altura = resultSet.getString("altura");
+                    return altura;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+    public String getPesoPeloCpf(String cpf) {
+        String sql = "Select peso FROM aluno WHERE cpf = (?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, cpf);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String peso = resultSet.getString("peso");
+                    return peso;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+    public int getIdadePeloCpf(String cpf) {
+        String sql = "Select dataNascimento FROM aluno WHERE cpf = (?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, cpf);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String dn = resultSet.getString("dataNascimento");
+                    LocalDate hoje = LocalDate.now();
+                    LocalDate birthDate = LocalDate.parse(dn);
+                    Period period = Period.between(birthDate, hoje);
+                    return period.getYears();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 
     public void atualizarDados(String cpf, String nome, String dn, double peso, int altura) {
@@ -168,4 +201,25 @@ public class AlunoDAO {
         LocalDate date = LocalDate.parse(inputDate, inputFormatter);
         return date.format(outputFormatter);
     }
+
+    // Imprimir dados em um arquivo txt:
+    public void imprimeDados(String cpf) {
+        String caminho = System.getProperty("user.home") + "/Desktop";
+        String nome = getNomePeloCpf(cpf);
+        String filePath = caminho + "/relatorio "+nome+".txt";
+        String relatorio =  "Nome: " + nome + "\n" +
+                            "Idade: " + getIdadePeloCpf(cpf) + "\n" +
+                            "Peso: " + getPesoPeloCpf(cpf) + "\n" +
+                            "Altura: " + getAlturaPeloCpf(cpf) + "\n" +
+                            "Índice de Massa Corporal (IMC): " + calculaIMC(cpf);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(relatorio);
+            System.out.println("Arquivo salvo em: " + filePath);
+            JOptionPane.showMessageDialog(null, "Relatório de " + nome + "salvo em: " + filePath);
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao tentar salvar o arquivo: " + e.getMessage());
+        }
+    }
 }
+

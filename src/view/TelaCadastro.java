@@ -25,21 +25,6 @@ public class TelaCadastro extends JFrame {
         setVisible(true);
 
         AlunoDAO alunoController = new AlunoDAO();
-
-        atualizarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new TelaBusca().setVisible(true);
-            }
-        });
-        excluirButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new TelaBusca().setVisible(true);
-            }
-        });
         buscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -207,8 +192,6 @@ public class TelaCadastro extends JFrame {
 
     private JButton cadastrarButton;
     private JButton buscarButton;
-    private JButton atualizarButton;
-    private JButton excluirButton;
     private JPanel MainPane;
     private JButton cadastrarButton1;
     private JTextField diaTxt;

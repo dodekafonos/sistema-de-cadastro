@@ -22,7 +22,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="cbb81" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="cbb81" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
               <grid row="0" column="0" row-span="4" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="true">
@@ -38,7 +38,7 @@
             <children>
               <component id="246b4" class="javax.swing.JButton" binding="cadastrarButton" default-binding="true">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="120" height="30"/>
                     <maximum-size width="120" height="30"/>
                   </grid>
@@ -46,6 +46,18 @@
                 <properties>
                   <font name="JetBrains Mono" size="14"/>
                   <text value="Voltar"/>
+                </properties>
+              </component>
+              <component id="774b5" class="javax.swing.JButton" binding="relatorioButton">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="120" height="30"/>
+                    <maximum-size width="120" height="30"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14"/>
+                  <text value="Imprimir"/>
                 </properties>
               </component>
             </children>
@@ -110,19 +122,20 @@
           </component>
           <component id="4b3a8" class="javax.swing.JButton" binding="excluirButton" default-binding="true">
             <constraints>
-              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="80" height="-1"/>
                 <preferred-size width="160" height="38"/>
                 <maximum-size width="180" height="40"/>
               </grid>
             </constraints>
             <properties>
+              <horizontalAlignment value="0"/>
               <text value="Excluir"/>
             </properties>
           </component>
           <component id="4507d" class="javax.swing.JButton" binding="atualizarDadosButton">
             <constraints>
-              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="80" height="-1"/>
                 <preferred-size width="160" height="38"/>
                 <maximum-size width="180" height="40"/>

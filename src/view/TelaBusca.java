@@ -96,6 +96,13 @@ public class TelaBusca extends JFrame{
                 JOptionPane.showMessageDialog(null, msg);
             }
         });
+        relatorioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cpf = table1.getValueAt(table1.getSelectedRow(), 0).toString();
+                new AlunoDAO().imprimeDados(cpf);
+            }
+        });
     }
 
     public void createTable() {
@@ -127,4 +134,5 @@ public class TelaBusca extends JFrame{
     private JTextField nomeTxt;
     private JButton atualizarDadosButton;
     private JButton calcularIMCBtn;
+    private JButton relatorioButton;
 }
