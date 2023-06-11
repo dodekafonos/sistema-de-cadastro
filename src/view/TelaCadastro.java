@@ -47,32 +47,22 @@ public class TelaCadastro extends JFrame {
                 new TelaBusca().setVisible(true);
             }
         });
-        diaTxt.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                diaTxt.setText("");
-            }
-        });
-        mesTxt.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                mesTxt.setText("");
-            }
-        });
-        anoTxt.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                anoTxt.setText("");
-            }
-        });
+
         nomeTxt.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
                 nomeTxt.setText("");
+            }
+        });
+        nomeTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String txt = nomeTxt.getText();
+                if (txt.equals("")) {
+                    nomeTxt.setText("Ruy Mauro Marini");
+                }
             }
         });
         cpfTxt.addFocusListener(new FocusAdapter() {
@@ -82,6 +72,67 @@ public class TelaCadastro extends JFrame {
                 cpfTxt.setText("");
             }
         });
+        cpfTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String txt = cpfTxt.getText();
+                if (txt.equals("")) {
+                    cpfTxt.setText("123.456.789-01");
+                }
+            }
+        });
+        diaTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                diaTxt.setText("");
+            }
+        });
+        diaTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String txt = diaTxt.getText();
+                if (txt.equals("")) {
+                    diaTxt.setText("Dia");
+                }
+            }
+        });
+        mesTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                mesTxt.setText("");
+            }
+        });
+        mesTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String txt = mesTxt.getText();
+                if (txt.equals("")) {
+                    mesTxt.setText("Mês");
+                }
+            }
+        });
+        anoTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                anoTxt.setText("");
+            }
+        });
+        anoTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String txt = anoTxt.getText();
+                if (txt.equals("")) {
+                    anoTxt.setText("Ano");
+                }
+            }
+        });
         pesoTxt.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -89,11 +140,31 @@ public class TelaCadastro extends JFrame {
                 pesoTxt.setText("");
             }
         });
+        pesoTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String txt = pesoTxt.getText();
+                if (txt.equals("")) {
+                    pesoTxt.setText("82.5");
+                }
+            }
+        });
         alturaTxt.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
                 alturaTxt.setText("");
+            }
+        });
+        alturaTxt.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String txt = alturaTxt.getText();
+                if (txt.equals("")) {
+                    alturaTxt.setText("182");
+                }
             }
         });
         cadastrarButton1.addActionListener(new ActionListener() {

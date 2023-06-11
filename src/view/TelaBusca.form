@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="eb61c" binding="MainPane" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="eb61c" binding="MainPane" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="10" bottom="10" right="10"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
@@ -25,7 +25,7 @@
           <grid id="cbb81" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
-              <grid row="1" column="0" row-span="3" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="true">
+              <grid row="0" column="0" row-span="4" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="true">
                 <minimum-size width="60" height="200"/>
                 <preferred-size width="170" height="400"/>
                 <maximum-size width="1080" height="1920"/>
@@ -50,20 +50,9 @@
               </component>
             </children>
           </grid>
-          <component id="b19fd" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="360" height="22"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font name="JetBrains Mono" size="16" style="1"/>
-              <text value="Buscar Registro"/>
-            </properties>
-          </component>
           <component id="40525" class="javax.swing.JTable" binding="table1" default-binding="true">
             <constraints>
-              <grid row="3" column="1" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
               </grid>
             </constraints>
@@ -73,7 +62,7 @@
           </component>
           <component id="baa62" class="javax.swing.JLabel">
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="141" height="17"/>
               </grid>
             </constraints>
@@ -86,7 +75,7 @@
           </component>
           <component id="61355" class="javax.swing.JTextField" binding="nomeTxt">
             <constraints>
-              <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="1" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false">
+              <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="1" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="360" height="38"/>
               </grid>
             </constraints>
@@ -98,7 +87,7 @@
           </component>
           <component id="18dbf" class="javax.swing.JButton" binding="buscarButton2">
             <constraints>
-              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="9" fill="0" indent="0" use-parent-layout="false">
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="9" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="360" height="38"/>
               </grid>
             </constraints>
@@ -109,7 +98,7 @@
           </component>
           <component id="ff686" class="javax.swing.JButton" binding="calcularIMCBtn">
             <constraints>
-              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="80" height="-1"/>
                 <preferred-size width="160" height="38"/>
                 <maximum-size width="180" height="40"/>
@@ -121,7 +110,7 @@
           </component>
           <component id="4b3a8" class="javax.swing.JButton" binding="excluirButton" default-binding="true">
             <constraints>
-              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="80" height="-1"/>
                 <preferred-size width="160" height="38"/>
                 <maximum-size width="180" height="40"/>
@@ -133,7 +122,7 @@
           </component>
           <component id="4507d" class="javax.swing.JButton" binding="atualizarDadosButton">
             <constraints>
-              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="80" height="-1"/>
                 <preferred-size width="160" height="38"/>
                 <maximum-size width="180" height="40"/>
