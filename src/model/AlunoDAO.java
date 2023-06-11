@@ -153,6 +153,7 @@ public class AlunoDAO {
     }
 
     public void atualizarDados(String cpf, String nome, String dn, double peso, int altura) {
+        dn = desformataData(dn);
         String sql = "UPDATE aluno SET nome = ?, dataNascimento = ?, peso = ?, altura = ? WHERE cpf = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, nome);
@@ -168,7 +169,7 @@ public class AlunoDAO {
         }
     }
 
-    public String calculaIMC(String cpf) {
+    public double calculaIMC(String cpf) {
         String sql = "SELECT peso, altura FROM aluno WHERE cpf = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, cpf);
@@ -177,15 +178,13 @@ public class AlunoDAO {
                     double peso = resultSet.getDouble("peso");
                     double altura = resultSet.getInt("altura");
                     double imc = peso / ((altura / 100) * (altura / 100));
-
-                    DecimalFormat decimalFormat = new DecimalFormat("#.##");
-                    return decimalFormat.format(imc);
+                    return Math.round(imc * 100.0) / 100.0;
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return "Não foi possível calcular o IMC.";
+        return 0;
     }
 
     // Converter data yyyy-mm-dd para dd/mm/yyyy:
@@ -202,16 +201,39 @@ public class AlunoDAO {
         return date.format(outputFormatter);
     }
 
+    // Parecer sobre IMC:
+    public String parecerImc(double imc) {
+        if (imc < 18.5) {
+            return "magreza. \nRecomendamos uma dieta com mais carboidratos e proteínas e exercícios de hipertrofia para o ganho de massa magra.";
+        } else if (imc < 24.9) {
+            return "normalidade. \nVocê está saudável! Mantenha os bons hábitos.";
+        } else if (imc < 29.9) {
+            return "sobrepeso. \nRecomendamos uma dieta focada em fibras e proteína e exercícios aeróbicos.";
+        } else if (imc < 39.9) {
+            return "obesidade. \nRecomendamos que consulte um nutricionista e faça exercícios aeróbicos regularmente.";
+        } else {
+            return "obesidade grave. \nRecomendamos que consulte especialistas para melhorar sua saúde.";
+        }
+    }
+
     // Imprimir dados em um arquivo txt:
     public void imprimeDados(String cpf) {
         String caminho = System.getProperty("user.home") + "/Desktop";
         String nome = getNomePeloCpf(cpf);
-        String filePath = caminho + "/relatorio "+nome+".txt";
-        String relatorio =  "Nome: " + nome + "\n" +
+        String data = formataData(String.valueOf(LocalDate.now()));
+        String hoje = String.valueOf(LocalDate.now());
+        String filePath = caminho + "/relatorio " + nome + " " + hoje + ".txt";
+        String relatorio =  "RELATÓRIO AUTOMÁTICO DE PROGRESSO" + "\n" +
+                            "==============================================================================" + "\n" +
+                            "Nome: " + nome + "\n" +
                             "Idade: " + getIdadePeloCpf(cpf) + "\n" +
                             "Peso: " + getPesoPeloCpf(cpf) + "\n" +
                             "Altura: " + getAlturaPeloCpf(cpf) + "\n" +
-                            "Índice de Massa Corporal (IMC): " + calculaIMC(cpf);
+                            "Índice de Massa Corporal (IMC): " + calculaIMC(cpf) + "\n" +
+                            "Parecer sobre IMC: sua situação corpórea é de: " + parecerImc(calculaIMC(cpf)) + "\n" +
+                            "==============================================================================" + "\n" +
+                            "Emitido em: " + data;
+
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(relatorio);

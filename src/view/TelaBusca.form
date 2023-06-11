@@ -70,6 +70,7 @@
             </constraints>
             <properties>
               <cellSelectionEnabled value="true"/>
+              <font name="JetBrains Mono" size="12" style="0"/>
             </properties>
           </component>
           <component id="baa62" class="javax.swing.JLabel">
@@ -117,6 +118,7 @@
               </grid>
             </constraints>
             <properties>
+              <font name="JetBrains Mono"/>
               <text value="Calcular IMC"/>
             </properties>
           </component>
@@ -129,6 +131,7 @@
               </grid>
             </constraints>
             <properties>
+              <font name="JetBrains Mono"/>
               <horizontalAlignment value="0"/>
               <text value="Excluir"/>
             </properties>
@@ -142,6 +145,7 @@
               </grid>
             </constraints>
             <properties>
+              <font name="JetBrains Mono"/>
               <text value="Atualizar Dados"/>
             </properties>
           </component>

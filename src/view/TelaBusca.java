@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +52,6 @@ public class TelaBusca extends JFrame{
                             int selectedRow = table1.getSelectedRow();
                             if (selectedRow != -1) {
                                 String cpf = table1.getValueAt(selectedRow, 0).toString();
-                                System.out.println("Selected CPF: " + cpf);
                             }
                         }
                     }
@@ -62,7 +62,9 @@ public class TelaBusca extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = table1.getSelectedRow();
-                if (selectedRow != -1) {
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Nenhum registro selecionado.");
+                } else {
                     String cpf = table1.getValueAt(selectedRow, 0).toString();
                     String nome = table1.getValueAt(selectedRow, 1).toString();
                     String dn = table1.getValueAt(selectedRow, 2).toString();
@@ -78,7 +80,9 @@ public class TelaBusca extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = table1.getSelectedRow();
-                if (selectedRow != -1) {
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Nenhum registro selecionado");
+                } else {
                     String cpf = table1.getValueAt(selectedRow, 0).toString();
                     System.out.println("CPF selecionado: " + cpf);
                     new AlunoDAO().deletarAluno(cpf);
@@ -91,7 +95,7 @@ public class TelaBusca extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cpf = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                 String nome = table1.getValueAt(table1.getSelectedRow(), 1).toString();
-                String imc = new AlunoDAO().calculaIMC(cpf);
+                double imc = new AlunoDAO().calculaIMC(cpf);
                 String msg = "O IMC de " + nome + " é de " + imc + ".";
                 JOptionPane.showMessageDialog(null, msg);
             }
@@ -100,7 +104,11 @@ public class TelaBusca extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String cpf = table1.getValueAt(table1.getSelectedRow(), 0).toString();
-                new AlunoDAO().imprimeDados(cpf);
+                if (table1.getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(null, "Nenhum registro selecionado.");
+                } else {
+                    new AlunoDAO().imprimeDados(cpf);
+                }
             }
         });
     }
@@ -117,11 +125,24 @@ public class TelaBusca extends JFrame{
         String[] header = {"CPF", "Nome", "Data Nasc.", "Peso", "Altura"};
         tableModel.addRow(header);
         for (Aluno aluno : alunos) {
-            Object[] rowData = {aluno.getCpf(), aluno.getNome(), aluno.getDataNascimento(), aluno.getPeso(), aluno.getAltura()};
+            Object[] rowData = {aluno.getCpf(),
+                                aluno.getNome(),
+                                AlunoDAO.formataData(aluno.getDataNascimento()),
+                                aluno.getPeso(),
+                                aluno.getAltura()};
             tableModel.addRow(rowData);
         }
 
         table1.setModel(tableModel);
+
+        // Set custom column sizes
+        TableColumnModel columnModel = table1.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(150);  // CPF
+        columnModel.getColumn(1).setPreferredWidth(200);  // Nome
+        columnModel.getColumn(2).setPreferredWidth(100);  // Data de Nascimento
+        columnModel.getColumn(3).setPreferredWidth(80);   // Peso
+        columnModel.getColumn(4).setPreferredWidth(80);   // Altura
+
     }
 
 
