@@ -237,8 +237,7 @@ public class AlunoDAO {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(relatorio);
-            System.out.println("Arquivo salvo em: " + filePath);
-            JOptionPane.showMessageDialog(null, "Relatório de " + nome + "salvo em: " + filePath);
+            JOptionPane.showMessageDialog(null, "O relatório de " + nome + " foi salvo na área de trabalho.");
         } catch (IOException e) {
             System.out.println("Ocorreu um erro ao tentar salvar o arquivo: " + e.getMessage());
         }
