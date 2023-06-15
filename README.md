@@ -13,3 +13,9 @@ It also offers the possibilities of calculation of BMI (Body Mass Index) and sal
 about the person in a text file in your desktop. 
 
 A simple program that can be expanded to manage records of a school, hospital or gym. 
+
+# Preview:
+
+
+https://github.com/dodekafonos/sistema-de-cadastro/assets/64814482/4179b421-8d02-4eec-998f-07e781f5ba83
+
